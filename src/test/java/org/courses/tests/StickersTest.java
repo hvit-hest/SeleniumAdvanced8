@@ -13,10 +13,11 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class StickersTest {
 
-    private WebDriver driver;
+    private WebDriver myPersonalDriver;
     private String userEmail;
     private String userPassword;
     private MainPage mainPage;
@@ -25,8 +26,9 @@ public class StickersTest {
     public void beforeClass() {
         userPassword = new Utils().getTestProperties().getProperty("userPassword");
         userEmail = new Utils().getTestProperties().getProperty("userEmail");
-        driver = new WebDriverSelection().getDriverFromProperties();
-        mainPage = new MainPage(driver);
+        myPersonalDriver = new WebDriverSelection().getDriverFromProperties();
+        myPersonalDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        mainPage = new MainPage(myPersonalDriver);
         mainPage.open();
         mainPage.login(userEmail, userPassword);
     }
@@ -55,6 +57,6 @@ public class StickersTest {
 
     @AfterClass
     public void afterClass() {
-        driver.quit();
+        myPersonalDriver.quit();
     }
 }
