@@ -1,2 +1,2 @@
-# SeleniumHomeWork8
+# SeleniumAdvanced8
  mvn clean test -Pchrome
